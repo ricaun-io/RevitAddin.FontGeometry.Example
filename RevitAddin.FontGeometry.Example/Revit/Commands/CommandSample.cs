@@ -22,7 +22,7 @@ namespace RevitAddin.FontGeometry.Example.Revit.Commands
             var y = 0.0;
             using (Transaction transaction = new Transaction(document))
             {
-                transaction.Start("Create");
+                transaction.Start("CreateSample");
                 document.DeleteDirectShape();
                 foreach (var fontName in fontNames)
                 {

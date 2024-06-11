@@ -3,6 +3,7 @@ using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
 using RevitAddin.FontGeometry.Example.Services;
 using ricaun.Revit.DB.Shape;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,12 +19,12 @@ namespace RevitAddin.FontGeometry.Example.Revit.Commands
             Document document = uiapp.ActiveUIDocument.Document;
 
             var fontPathGeometryService = new FontPathGeometryService();
-            fontPathGeometryService.FontWeight = System.Windows.FontWeights.Bold;
 
             fontPathGeometryService.Tolerance = 2;
 
             var text = "Revit";
-            var pathGeometry = fontPathGeometryService.CreateText(text, 100);
+            var size = 100; // size < 10mm not work well.
+            var pathGeometry = fontPathGeometryService.CreateText(text, size);
 
             using (Transaction transaction = new Transaction(document))
             {
@@ -43,21 +44,22 @@ namespace RevitAddin.FontGeometry.Example.Revit.Commands
                     var curves = revitPoints.ToCurves();
                     document.CreateDirectShape(curves);
                     curvesText.AddRange(curves);
-                    //try
-                    //{
-                    //    document.CreateDirectShape(curves.ToSolidExtrusionGeometry());
-                    //}
-                    //catch (Exception)
-                    //{
-
-                    //}
+                    try
+                    {
+                        document.CreateDirectShape(curves.ToSolidExtrusionGeometry()).Location.Move(XYZ.BasisZ*0.5);
+                    }
+                    catch { }
                 }
 
-                //document.CreateDirectShape(curvesText.ToSolidExtrusionGeometry());
 
-                var textFace = curvesText.ToSolidExtrusionGeometry().Faces.OfType<Face>().Skip(1).First();
-                var textFaceModel = document.CreateDirectShape(textFace.Triangulate());
-                textFaceModel.Location.Move(XYZ.BasisZ);
+                try
+                {
+                    //document.CreateDirectShape(curvesText.ToSolidExtrusionGeometry());
+                    var textFace = curvesText.ToSolidExtrusionGeometry().Faces.OfType<Face>().Skip(1).First();
+                    var textFaceModel = document.CreateDirectShape(textFace.Triangulate());
+                    textFaceModel.Location.Move(XYZ.BasisZ);
+                }
+                catch (Exception ex) { Console.WriteLine(ex); }
 
                 transaction.Commit();
             }

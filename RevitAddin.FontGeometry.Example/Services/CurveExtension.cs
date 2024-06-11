@@ -10,14 +10,45 @@ namespace RevitAddin.FontGeometry.Example.Services
 {
     public static class CurveExtension
     {
-        public static List<Curve> ToCurves(this IEnumerable<XYZ> _points, bool closed = true)
+        const double ShortCurveTolerance = 0.0025602645572916664;
+
+        public static List<XYZ> RemoveShortCurve(this IEnumerable<XYZ> _points, bool closed = true)
         {
             var points = _points.ToList();
 
-            //if (points.Count < 2)
-            //{
-            //    return new List<Curve>();
-            //}
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                var p1 = points[i];
+                var p2 = points[i + 1];
+                if (p1.DistanceTo(p2) < ShortCurveTolerance)
+                {
+                    points.RemoveAt(i + 1);
+                    i--;
+                }
+            }
+
+            if (closed)
+            {
+                for (int i = 0; i < points.Count - 1; i++)
+                {
+                    if (points.First().DistanceTo(points.Last()) < ShortCurveTolerance)
+                    {
+                        points.RemoveAt(points.Count - 1);
+                    }
+                }
+            }
+
+            return points;
+        }
+
+        public static List<Curve> ToCurves(this IEnumerable<XYZ> _points, bool closed = true)
+        {
+            var points = _points.RemoveShortCurve(closed);
+
+            if (points.Count <= 2)
+            {
+                return new List<Curve>();
+            }
 
             if (closed)
             {
@@ -25,23 +56,19 @@ namespace RevitAddin.FontGeometry.Example.Services
             }
 
             var curves = new List<Curve>();
-            XYZ lastPoint = null;
             for (int i = 0; i < points.Count() - 1; i++)
             {
                 try
                 {
-                    var point1 = lastPoint ?? points.ElementAt(i);
+                    var point1 = points.ElementAt(i);
                     var point2 = points.ElementAt(i + 1);
-
                     curves.Add(Line.CreateBound(point1, point2));
-                    lastPoint = null;
                 }
-                catch 
+                catch (Exception ex)
                 {
-                    lastPoint ??= points.ElementAt(i);
+                    Console.WriteLine(ex);
                 }
             }
-            
 
             return curves;
 
