@@ -1,0 +1,45 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution", "Solution", "{59EBABBB-BE66-4B6C-98F1-7FD4F94DF16C}"
+	ProjectSection(SolutionItems) = preProject
+		CHANGELOG.md = CHANGELOG.md
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RevitAddin.FontGeometry.Example", "RevitAddin.FontGeometry.Example\RevitAddin.FontGeometry.Example.csproj", "{74516DE1-5445-4176-8C26-B590D5CAA759}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Build", "Build\Build.csproj", "{DD93A8F0-C021-4C54-8537-8F68D8EE0884}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		2021|Any CPU = 2021|Any CPU
+		2025|Any CPU = 2025|Any CPU
+		Debug 2021|Any CPU = Debug 2021|Any CPU
+		Debug 2025|Any CPU = Debug 2025|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.2021|Any CPU.ActiveCfg = 2021|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.2021|Any CPU.Build.0 = 2021|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.2025|Any CPU.ActiveCfg = 2025|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.2025|Any CPU.Build.0 = 2025|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.Debug 2021|Any CPU.ActiveCfg = Debug 2021|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.Debug 2021|Any CPU.Build.0 = Debug 2021|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.Debug 2025|Any CPU.ActiveCfg = Debug 2025|Any CPU
+		{74516DE1-5445-4176-8C26-B590D5CAA759}.Debug 2025|Any CPU.Build.0 = Debug 2025|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.2021|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.2021|Any CPU.Build.0 = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.2025|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.2025|Any CPU.Build.0 = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.Debug 2021|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.Debug 2021|Any CPU.Build.0 = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.Debug 2025|Any CPU.ActiveCfg = Debug|Any CPU
+		{DD93A8F0-C021-4C54-8537-8F68D8EE0884}.Debug 2025|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
