@@ -12,6 +12,8 @@ namespace RevitAddin.FontGeometry.Example.Revit
         public Result OnStartup(UIControlledApplication application)
         {
             ribbonPanel = application.CreatePanel("FontGeometry");
+            ribbonPanel.CreatePushButton<Commands.Command>("Revit")
+                .SetLargeImage("Resources/Revit.ico");
             ribbonPanel.CreatePushButton<Commands.CommandSample>("Sample")
                 .SetLargeImage("Resources/Revit.ico");
             return Result.Succeeded;
